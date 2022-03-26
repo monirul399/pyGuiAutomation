@@ -147,4 +147,3 @@ for i, location in enumerate(locations):
 
 
 
-

@@ -30,6 +30,31 @@ def preProcessing(df):
         data.T[1][i] = item
 
     df = pd.DataFrame(data, columns=columns)
+
+    # Phone number filter when phone_number == nan and business_duration got the phone number
+    temp = df[df['phone_number'] == 'NULL']           # here check will be with null
+    l = temp.index.tolist()
+    for i in l:
+        ph_no = df.loc[i, 'business_duration']
+        ph_no = str(ph_no).split('+')
+
+        if len(ph_no) == 2:
+            ph_no = ph_no[1].replace('-', '')
+            ph_no = ph_no.replace(' ', '')
+        else:
+            ph_no = 'NULL'
+        df.loc[i, 'phone_number'] = ph_no
+    return df
+
+
+def dataFiltering(df):
+    # filter unique phone number and website for preparing the final dataset
+    d = df[(df['phone_number'].isnull() == True) & (df['website'].isnull() == True)]
+    l = d.index.tolist()
+    df = df.drop(l)
+    duplicate = df[df.duplicated('phone_number')]
+    l = duplicate.index.tolist()
+    df = df.drop(l)
     return df
 
 
@@ -51,14 +76,5 @@ def processedDataframe(path):
     df = dataLoad(path)
     df = dataCleaning(df)
     df = preProcessing(df)
+    df = dataFiltering(df)
     return df
-
-
-# Testing code
-#file = f"C:/Users/Monir/Documents/pyGuiAutomation/files/campaign/alberta ,canada.csv"
-#df = processedDataframe(file)
-#df = dataLoad(file)
-#df = dataCleaning(df)
-#df = preProcessing(df)
-#df.info()
-#print(df)
