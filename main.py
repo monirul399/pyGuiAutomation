@@ -1,11 +1,11 @@
 import pyautogui as pg
 import numpy as np
 import pandas as pd
-import csv
 import time
 import shutil
 import os
-import csvProcessing
+from subModules import csvProcessing
+from subModules import handyTasks
 
 
 # Functions
@@ -21,26 +21,20 @@ def mapscroll():
     pg.mouseUp()
 
 
+def scrollDownSERP(x, y):
+    # Scrolling down the page
+    pg.moveTo(x, y)
+    pg.mouseDown()
+    pg.moveTo(x, y + 40)
+    pg.mouseUp()
+    return x, y + 40
+
+
 def openChromeBrowser():
     # Open chrome browser
     x, y = pg.locateCenterOnScreen("images/B2Cchrome.png", grayscale=True,
                                    confidence=0.9)  # This image won't work if photo of B2Cserver email changes
     pg.click(x, y)
-
-
-def urlWrite():
-    # Write on URL for search
-    x, y = 800, 80
-    pg.click(x, y)
-
-
-def scrollDownSERP(x, y):
-    # Scrolling down the page
-    pg.moveTo(x, y)
-    pg.mouseDown()
-    pg.moveTo(x, y + 30)
-    pg.mouseUp()
-    return x, y + 30
 
 
 def clickMoreBusiness():
@@ -94,18 +88,22 @@ for i, location in enumerate(locations):
         searchTag = service + " in " + location[1] + " ," + location[0]
 
         openChromeBrowser()
-        urlWrite()
-
-        pg.write(searchTag, interval=0.02)
-        pg.press('enter')
-        time.sleep(2)
+        handyTasks.openNewChromeTab()
+        handyTasks.urlWrite(searchTag)
 
         # Scroll Gradually and hit more business button
         X, Y = 1906, 260
         while True:
             X, Y = scrollDownSERP(X, Y)
+            # click on more business
             try:
                 clickMoreBusiness()
+                break
+            except TypeError:
+                pass
+            # click on view all
+            try:
+                handyTasks.clickViewAll()
                 break
             except TypeError:
                 pass
@@ -135,15 +133,3 @@ for i, location in enumerate(locations):
         # Data Preprocessing
         df = csvProcessing.processedDataframe(filePath)
         df.to_csv(dataFramePath, mode='a', index=False, header=False)
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,31 @@
 ## Module 1: <span style="color: maroon">Make a Business directory listing<span>
 Runable File: `main.py`
 
+### Module Tasks
+* Collect Business from Google map data
+
 ### Necessary Information for Coding
-* Hunter Scrapper Position :  ```x, y = 1643, 80```
-* URL Position :  ```x, y = 1643, 80```
+* Hunter Scrapper Position :  
+```py 
+x, y = 1643, 80
+```
+* URL Position :  
+```py
+* x, y = 1643, 80
+```
+* This code chunk is for showing all columns for pandas dataset
+```py
+import pandas as pd
+
+desired_width = 320
+pd.set_option('display.width', desired_width)
+pd.set_option('display.max_columns', 10)
+```
+* Iterate over rows for a *dataframe*.
+```py
+for index, row in [dataframe].iterrows():
+    pass
+```
 
 ### Necessary Insight
 * This program will always start with on-display chrome tab 
@@ -23,6 +45,41 @@ Runable File: `main.py`
 
 ### Issues & Improvement scope
 * Find display **image** more *precisely*.
+* Use try catch when for images 
+
+## Module 2: <span style="color: maroon">Generate necessary Campaign files<span>
+
+### Module Tasks
+* Collect `email` and `facebook link` for those businesses and append columns with original files
+
+### Necessary Information for Coding
+* `"files/campaignEmailFacebook"` contains email, facebook added `CSV`
+* *Open Whatsapp* coordinates :
+```py
+pg.click(1127, 334)
+```
+### Necessary Insight
+* Connect vpn for accessing blocked websites
+### Task List
+
+### Issues & Improvement scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

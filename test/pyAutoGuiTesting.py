@@ -63,7 +63,7 @@ def getCordinates():
         print(currentMouseX, currentMouseY)
         time.sleep(3)
 
-
+getCordinates()
 
 
 
