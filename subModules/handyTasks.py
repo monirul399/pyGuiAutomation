@@ -24,7 +24,7 @@ def urlWrite(searchTag):
     x, y = 800, 80
     pg.click(x, y)
 
-    pg.write(searchTag, interval=0.02)
+    pg.write(searchTag, interval=0.01)
     pg.press('enter')
     time.sleep(2)
 
@@ -46,4 +46,22 @@ def closeChromeTab():
     pg.keyDown('ctrl')
     pg.press('w')
     pg.keyUp('ctrl')
+
+
+def selectAll():
+    pg.keyDown('ctrl')
+    pg.press('a')
+    pg.keyUp('ctrl')
+
+def copyAll():
+    pg.keyDown('ctrl')
+    pg.press('c')
+    pg.keyUp('ctrl')
+
+def pasteAll():
+    pg.keyDown('ctrl')
+    pg.press('v')
+    pg.keyUp('ctrl')
+
+
 
